@@ -7,7 +7,8 @@ H, W = axi.A3_SIZE
 def main():
     paths = []
 
-    if False:
+    sketch = 6
+    if sketch == 0:
         for n in range(0, 100000):
             x = random.random() * W
             y = random.random() * H
@@ -16,7 +17,7 @@ def main():
             ]
             paths.append(path)
 
-    elif False:
+    elif sketch == 1:
         for n in range(0, 40000):
             x = random.random() * W
             y = random.random() * H
@@ -28,7 +29,7 @@ def main():
             ]
             paths.append(path)
 
-    elif False:
+    elif sketch == 2:
         for n in range(0, 40000):
             x = random.random() * W
             y = random.random() * H
@@ -41,7 +42,7 @@ def main():
             paths.append(path)
 
 
-    elif False:
+    elif sketch == 3:
         for x_ in range(math.floor(W * 10)):
             for y_ in range(math.floor(H * 10)):
                 x = x_ / 10
@@ -54,7 +55,7 @@ def main():
                 ]
                 paths.append(path)
 
-    elif False:
+    elif sketch == 4:
         for x_ in range(math.floor(W * 10)):
             for y_ in range(math.floor(H * 10)):
                 x = x_ / 10
@@ -68,7 +69,7 @@ def main():
                 ]
                 paths.append(path)
 
-    elif False:
+    elif sketch == 5:
         for x_ in range(math.floor(W * 10)):
             for y_ in range(math.floor(H * 10)):
                 x = x_ / 10
@@ -82,7 +83,7 @@ def main():
                 ]
                 paths.append(path)
 
-    elif True:
+    elif sketch == 6:
         for x_ in range(math.floor(W * 10)):
             for y_ in range(math.floor(H * 10)):
                 x = x_ / 10
@@ -103,7 +104,7 @@ def main():
     d = d.rotate(-90).move(H / 2, W / 2, 0.5, 0.5)
 
     d.dump('out.axi')
-    d.render(bounds=axi.A3_BOUNDS, show_bounds=False).write_to_png('out.png')
+    d.render(bounds=axi.A3_BOUNDS, show_bounds=False).write_to_png('{}.png'.format(sketch))
 
 if __name__ == '__main__':
     main()
