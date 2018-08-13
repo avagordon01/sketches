@@ -8,7 +8,7 @@ H, W = axi.A3_SIZE
 def main():
     paths = []
 
-    sketch = 8
+    sketch = 9
     if sketch == 0:
         for n in range(0, 100000):
             x = random.random() * W
@@ -126,6 +126,15 @@ def main():
                 x += dx
                 y += dy
                 path.append((x, y))
+            paths.append(path)
+
+    elif sketch == 9:
+        for m in range(400):
+            radius = random.gauss(W / 4, W / 12)
+            path = []
+            for n in range(360 + 1):
+                angle = math.tau * n / 360
+                path.append((W / 2 + radius * math.cos(angle), H / 2 + radius * math.sin(angle)))
             paths.append(path)
 
     d = axi.Drawing(paths)
