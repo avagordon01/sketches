@@ -15,7 +15,7 @@ def main():
     paths = []
 
     planets = [ephem.Mercury(), ephem.Venus(), ephem.Sun(), ephem.Mars(), ephem.Jupiter(), ephem.Saturn(), ephem.Uranus(), ephem.Neptune()]
-    radii = [2440, 602, 6371, 3390, 69911, 58232, 25362, 24622]
+    radii = [2440, 6052, 6371, 3390, 69911, 58232, 25362, 24622]
 
     for n, p in enumerate(planets):
         path = []
