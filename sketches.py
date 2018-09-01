@@ -3,7 +3,9 @@ import math
 import random
 import noise
 
-H, W = axi.A3_SIZE
+A4_SIZE = (11.69, 8.27)
+A4_BOUNDS = (0, 0, 11.69, 8.27)
+H, W = A4_SIZE
 
 def main():
     paths = []
@@ -144,7 +146,7 @@ def main():
     d = d.rotate(-90).move(H / 2, W / 2, 0.5, 0.5)
 
     d.dump('out.axi')
-    d.render(bounds=axi.A3_BOUNDS, show_bounds=False).write_to_png('{}.png'.format(sketch))
+    d.render(bounds=A4_BOUNDS, show_bounds=False).write_to_png('{}.png'.format(sketch))
 
 if __name__ == '__main__':
     main()
