@@ -8,9 +8,11 @@ A4_BOUNDS = (0, 0, 11.69, 8.27)
 H, W = A4_SIZE
 
 def main():
+    random.seed(0xfeed)
+
     paths = []
 
-    sketch = 9
+    sketch = 11
     if sketch == 0:
         for n in range(0, 100000):
             x = random.random() * W
@@ -131,7 +133,7 @@ def main():
             paths.append(path)
 
     elif sketch == 9:
-        for m in range(400):
+        for m in range(40):
             radius = random.gauss(W / 4, W / 12)
             path = []
             for n in range(360 + 1):
@@ -139,10 +141,40 @@ def main():
                 path.append((W / 2 + radius * math.cos(angle), H / 2 + radius * math.sin(angle)))
             paths.append(path)
 
+    elif sketch == 10:
+        for i in range(3000):
+            x, y = random.random() * W, random.random() * H
+            path = []
+            path.append((x, y))
+            for j in range(100):
+                scale0 = 0.01
+                scale1 = 0.2
+                dx = scale0 * noise.snoise2(scale1 * x, scale1 * y)
+                dy = scale0 * noise.snoise2(1000 + scale1 * x, scale1 * y)
+                len = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2))
+                dx *= 0.01 / len
+                dy *= 0.01 / len
+                x += dx
+                y += dy
+                if x < 0 or x > W or y < 0 or y > H:
+                    break
+                path.append((x, y))
+            paths.append(path)
+
+    elif sketch == 11:
+        for i in range(1000000):
+            x, y = random.random() * W, random.random() * H
+            path = []
+            scale0 = 0.2
+            if random.random() < 0.5 + 0.5 * noise.snoise2(scale0 * x, scale0 * y, octaves=4, persistence=0.5):
+                path.append((x, y))
+                paths.append(path)
+
     d = axi.Drawing(paths)
 
-    d = d.join_paths(0.01)
-    d = d.simplify_paths(0.001)
+    #d = d.sort_paths()
+    #d = d.join_paths(0.01)
+    #d = d.simplify_paths(0.001)
     d = d.rotate(-90).move(H / 2, W / 2, 0.5, 0.5)
 
     d.dump('out.axi')
